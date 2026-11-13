@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+docs/_build/
+docs/generated/
+# figures written by the demos (also those drawn into paper/) are not tracked
+*.png
+!docs/_static/*.png
+/paper/*.pdf
+/runtime.pdf
+/runtime.csv
+/accuracy_vs_L/
+.ipynb_checkpoints/
+.venv/
+venv/
+.DS_Store
+Thumbs.db

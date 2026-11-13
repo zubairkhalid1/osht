@@ -1,0 +1,62 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below, together with the papers listed under references."
+type: software
+title: "osht: spherical harmonic transforms on optimal-dimensionality (L^2) samples"
+version: 0.1.0
+date-released: 2026-11-13
+license: MIT
+repository-code: "https://github.com/zubairkhalid1/osht"
+url: "https://zubairkhalid1.github.io/osht"
+abstract: >-
+  Forward and inverse spherical harmonic transforms of band-limited signals from
+  exactly L^2 samples on the sphere. The forward transform is an O(L^3)
+  interpolated elimination with no linear solves and no precomputation, with
+  two exact back-ends, multi-pass refinement and ring placements optimised for
+  stability.
+authors:
+  - family-names: Khalid
+    given-names: Zubair
+    email: zubair.khalid@lums.edu.pk
+    affiliation: "Lahore University of Management Sciences (LUMS)"
+keywords:
+  - spherical harmonics
+  - spherical harmonic transform
+  - sampling on the sphere
+  - optimal dimensionality
+  - signal processing on the sphere
+references:
+  - type: article
+    title: "An O(L^3) spherical harmonic transform on L^2 samples"
+    authors:
+      - family-names: Khalid
+        given-names: Zubair
+    year: 2026
+    journal: "arXiv preprint arXiv:2611.16441"
+    doi: 10.48550/arXiv.2611.16441
+    url: "https://arxiv.org/abs/2611.16441"
+  - type: article
+    title: "An optimal-dimensionality sampling scheme on the sphere with fast spherical harmonic transforms"
+    authors:
+      - family-names: Khalid
+        given-names: Zubair
+      - family-names: Kennedy
+        given-names: Rodney A.
+      - family-names: McEwen
+        given-names: Jason D.
+    journal: "IEEE Transactions on Signal Processing"
+    volume: 62
+    issue: 17
+    start: 4597
+    end: 4610
+    year: 2014
+    doi: 10.1109/TSP.2014.2337278
+preferred-citation:
+  type: article
+  title: "An O(L^3) spherical harmonic transform on L^2 samples"
+  authors:
+    - family-names: Khalid
+      given-names: Zubair
+  year: 2026
+  journal: "arXiv preprint arXiv:2611.16441"
+  doi: 10.48550/arXiv.2611.16441
+  url: "https://arxiv.org/abs/2611.16441"

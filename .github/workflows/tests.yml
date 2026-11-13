@@ -1,0 +1,69 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.9", "3.11", "3.13"]
+        exclude:
+          - os: macos-latest
+            python-version: "3.9"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[plot,test]"
+      - name: Test
+        run: pytest --cov=osht --cov-report=xml
+      - name: Upload coverage
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage.xml
+          fail_ci_if_error: false
+
+  lint:
+    name: Lint (ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install ruff
+      - run: ruff check src tests demos paper docs
+
+  demos:
+    name: Demos run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e ".[plot]"
+      - run: |
+          python demos/demo01_quickstart.py 32
+          python demos/demo02_real_signal_earth.py 64
+          python demos/demo03_placements_and_amplification.py 48
+          python demos/demo04_multipass_and_oracle.py 64
+          python demos/demo05_sampling_functions_and_new_L.py
+          python demos/demo06_batch_and_timing.py 128
+          python demos/demo07_runtime_vs_L.py 64 ci_runtime
+          python demos/demo08_accuracy_vs_L.py --Lmax 32 --signals 1 --out ci_accuracy
+          python paper/plot_runtime.py paper/runtime.csv ci_runtime_paper.pdf
+          python docs/make_readme_figures.py
